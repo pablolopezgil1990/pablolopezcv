@@ -547,16 +547,6 @@ function StackTecnologico({ primary, programs }: { primary: string; programs: Pr
           </button>
         ) : null}
       </section>
-
-      <section>
-        <div className="bg-gray-50 border border-gray-200 rounded-2xl p-5">
-          <p className="text-sm text-gray-700 leading-relaxed">
-            Propuesta: mantener este Stack tecnológico como un "catálogo" de herramientas (qué haces y qué impacto
-            aportas). Si te encaja, el siguiente paso es añadir 1–2 enlaces por herramienta (dashboard, repo, ejemplo)
-            para que se vea tu trabajo real.
-          </p>
-        </div>
-      </section>
     </div>
   );
 }
