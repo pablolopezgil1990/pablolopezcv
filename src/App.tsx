@@ -218,7 +218,8 @@ export default function App() {
             />
             <img
               alt="Foto de perfil profesional de Pablo López Gil"
-              className="relative w-32 h-32 object-cover object-center rounded-full border-4 border-[#F9FAFB] shadow-xl"
+              className="relative w-32 h-32 object-cover rounded-full border-4 border-[#F9FAFB] shadow-xl"
+              style={{ objectPosition: '55% 50%' }}
               src="/foto-perfil.jpg" 
             />
           </div>
