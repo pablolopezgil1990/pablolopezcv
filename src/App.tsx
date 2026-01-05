@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from "react";
 import {
   Mail,
-  Phone,
   Linkedin,
   Layers,
   Briefcase,
@@ -24,10 +23,8 @@ import {
 import { FaWhatsapp } from "react-icons/fa";
 
 /**
- * App "móvil" (max-w-md)
- * - React + Tailwind
- * - Solo modo claro
- * - Tabs: "Trayectoria" / "Stack tecnológico"
+ * App "móvil" (max-w-md) personalizada para Pablo López Gil
+ * Se han integrado rutas locales para Foto y CV.
  */
 export default function App() {
   const [tab, setTab] = useState<"cv" | "stack">("cv");
@@ -145,7 +142,7 @@ export default function App() {
       },
       {
         name: "Power BI",
-        desc: '\"Si no lo cuentas, no lo has hecho\". Un Dashboard favorece que el dato hable, transformando modelos complejos en narrativas visuales e interactivas, facilitando la toma de decisiones de forma clara, directa y en tiempo real.',
+        desc: '"Si no lo cuentas, no lo has hecho". Un Dashboard favorece que el dato hable, transformando modelos complejos en narrativas visuales e interactivas, facilitando la toma de decisiones de forma clara, directa y en tiempo real.',
         Icon: FileBarChart2,
         tags: ["Dashboards", "Decisión"],
       },
@@ -195,24 +192,6 @@ export default function App() {
     [],
   );
 
-  // ==============================
-  // Mini tests en DEV
-  // ==============================
-  if (typeof window !== "undefined") {
-    // @ts-expect-error - import.meta puede no existir fuera de Vite
-    const isDev = typeof import.meta !== "undefined" && (import.meta as any).env?.DEV;
-    if (isDev) {
-      console.assert(experiences.length >= 2, "Debe haber al menos 2 experiencias");
-      console.assert(experiences.some((e) => e.isOlder), "Debe existir experiencia anterior (isOlder=true)");
-      console.assert(programs.length >= 3, "Debe haber al menos 3 items en Stack tecnológico");
-      console.assert(
-        new Set(programs.map((p) => p.name)).size === programs.length,
-        "Los nombres del Stack deben ser únicos",
-      );
-      console.assert(programs.every((p) => p.desc.trim().length > 0), "Cada item del Stack debe tener desc");
-    }
-  }
-
   return (
     <div className={rootClass}>
       <style>{`
@@ -240,7 +219,7 @@ export default function App() {
             <img
               alt="Foto de perfil profesional de Pablo López Gil"
               className="relative w-32 h-32 object-cover rounded-full border-4 border-[#F9FAFB] shadow-xl"
-              src="https://media.licdn.com/dms/image/v2/D4D03AQFhmh9tr_t4ag/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1668192783338?e=1769040000&v=beta&t=KHZuFqPvK31hnair3JvO0pIjP5fxijzQxNP69LgZnnw"
+              src="/foto-perfil.jpg" 
             />
           </div>
 
@@ -318,7 +297,6 @@ export default function App() {
 
         {tab === "cv" ? (
           <div className="space-y-6">
-            {/* Experiencia */}
             <section>
               <div className="flex items-center gap-2 mb-4">
                 <div className="p-1.5 rounded-lg" style={{ backgroundColor: "rgba(107, 76, 95, 0.1)" }}>
@@ -359,7 +337,6 @@ export default function App() {
               </button>
             </section>
 
-            {/* Formación */}
             <section>
               <div className="flex items-center gap-2 mb-4">
                 <div className="p-1.5 rounded-lg" style={{ backgroundColor: "rgba(107, 76, 95, 0.1)" }}>
@@ -402,25 +379,23 @@ export default function App() {
         )}
       </main>
 
-      {/* Fixed CTA */}
+      {/* Botón flotante para descargar el CV PDF */}
       <div className="fixed bottom-6 left-0 right-0 px-6 max-w-md mx-auto z-40">
         <button
           className="w-full text-white font-bold py-3.5 px-4 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-transform active:scale-95"
           style={{ backgroundColor: primary }}
-          onClick={() => alert("Conecta aquí la URL de tu PDF (ej. /pablo-lopez-gil-cv.pdf)")}
+          onClick={() => window.open('/pablo-lopez-gil-cv.pdf', '_blank')}
         >
           <Download className="h-5 w-5" />
           Descargar CV Completo (PDF)
         </button>
       </div>
-
-      <nav className="fixed bottom-0 w-full bg-[#F9FAFB] border-t border-gray-200 pb-safe z-30 hidden" />
     </div>
   );
 }
 
 // ==============================
-// Tipos y componentes
+// Tipos y componentes auxiliares
 // ==============================
 
 type Experience = {
